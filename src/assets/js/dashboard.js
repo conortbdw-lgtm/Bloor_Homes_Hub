@@ -1,6 +1,4 @@
 $(function () {
-
-
   // Get checklist percentage function (shared with index.html)
   	function getChecklistPercentage(slot = null) {
     	const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
@@ -11,17 +9,70 @@ $(function () {
     	}
     	return 0;
   	}
-// =====================================
-// Breakup (BricsCAD Progress)
-// =====================================
-
-
-// =====================================
-  // Breakup2 (3DS Max) - Dynamic from checklist
-  // =====================================
-	const initialPercentage = getChecklistPercentage();
+	function getChecklistPercentage2(slot = null) {
+    	const key = slot ? `checklistBricscadState${slot}` : 'checklistBricscadState';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
+	function getChecklistPercentage3(slot = null) {
+    	const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
+	// =====================================
+  	// Breakup1 (BricsCAD) - Dynamic from checklist
+  	// =====================================
+	const initialPercentage1 = getChecklistPercentage2();
+	var breakup1 = {
+		series: [initialPercentage1],  // Loads saved checklist %
+    	labels: ["BricsCAD"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+	window.breakup1Chart = new ApexCharts(document.querySelector("#breakup1"), breakup1);  // Global for updates
+  	window.breakup1Chart.render();
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklistBricscadState')) {
+  			const perc = getChecklistPercentage2();
+      		window.breakup1Chart.updateOptions({ series: [perc] });
+    	}
+	});
+	// =====================================
+  	// Breakup2 (3DS Max) - Dynamic from checklist
+  	// =====================================
+	const initialPercentage2 = getChecklistPercentage();
 	var breakup2 = {
-		series: [initialPercentage],  // Loads saved checklist %
+		series: [initialPercentage2],  // Loads saved checklist %
     	labels: ["3DS Max"],
     	chart: {
       		height: 260,
@@ -55,52 +106,45 @@ $(function () {
   			const perc = getChecklistPercentage();
       		window.breakup2Chart.updateOptions({ series: [perc] });
     	}
-  	});
-  // =====================================
-  // Earning
-  // =====================================
-  var earning = {
-    chart: {
-      id: "sparkline3",
-      type: "area",
-      height: 60,
-      sparkline: {
-        enabled: true,
-      },
-      group: "sparklines",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    series: [
-      {
-        name: "Earnings",
-        color: "#49BEFF",
-        data: [25, 66, 20, 40, 12, 58, 20],
-      },
-    ],
-    stroke: {
-      curve: "smooth",
-      width: 2,
-    },
-    fill: {
-      colors: ["#f3feff"],
-      type: "solid",
-      opacity: 0.05,
-    },
-
-    markers: {
-      size: 0,
-    },
-    tooltip: {
-      theme: "dark",
-      fixed: {
-        enabled: true,
-        position: "right",
-      },
-      x: {
-        show: false,
-      },
-    },
-  };
-  new ApexCharts(document.querySelector("#earning"), earning).render();
+	});
+	// =====================================
+  	// Breakup3 (QC1) - Dynamic from checklist
+  	// =====================================
+	const initialPercentage3 = getChecklistPercentage3();
+	var breakup3 = {
+		series: [initialPercentage3],  // Loads saved checklist %
+    	labels: ["Quality Control"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+  	window.breakup3Chart = new ApexCharts(document.querySelector("#breakup3"), breakup3);  // Global for updates
+  	window.breakup3Chart.render();
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklistQC1State')) {
+  			const perc = getChecklistPercentage3();
+      		window.breakup3Chart.updateOptions({ series: [perc] });
+    	}
+	});
 })
