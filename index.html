@@ -83,25 +83,7 @@
 											<h5 class="card-title mb-9 fw-semibold">In Progress</h5>
 											<div class="row align-items-center">
 												<div class="col-8">
-													<h4 class="fw-semibold mb-3">$36,358</h4>
-													<div class="d-flex align-items-center mb-3">
-														<span
-															class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-															<i class="ti ti-arrow-up-left text-success"></i>
-														</span>
-														<p class="text-dark me-1 fs-3 mb-0">+9%</p>
-														<p class="fs-3 mb-0">last year</p>
-													</div>
-													<div class="d-flex align-items-center">
-														<div class="me-4">
-															<span class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-															<span class="fs-2">2023</span>
-														</div>
-														<div>
-															<span class="round-8 bg-light-primary rounded-circle me-2 d-inline-block"></span>
-															<span class="fs-2">2023</span>
-														</div>
-													</div>
+													<h4 class="fw-semibold mb-3">3DS Max</h4>
 												</div>
 												<div class="col-4">
 													<div class="d-flex justify-content-center">
@@ -422,6 +404,41 @@
   	<script src="src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
   	<script src="src/assets/libs/simplebar/dist/simplebar.js"></script>
   	<script src="src/assets/js/dashboard.js"></script>
+	<script>
+  // Read progress saved by checklist-3ds-max.html
+  function get3dsMaxProgress() {
+    try {
+      const raw = localStorage.getItem('checklist3dsMaxProgress');
+      if (!raw) return { completed: 0, total: 0, percent: 0 };
+      const data = JSON.parse(raw);
+      return {
+        completed: data.completed || 0,
+        total: data.total || 0,
+        percent: data.percent || 0
+      };
+    } catch (e) {
+      return { completed: 0, total: 0, percent: 0 };
+    }
+  }
+
+  function refresh3dsMaxChart() {
+    // radialBar chart created in dashboard.js
+    if (typeof chart === 'undefined') return;
+
+    const p = get3dsMaxProgress();
+    const percent = p.percent || 0;
+
+    // Update the single radial bar value
+    chart.updateSeries([percent]); // e.g. 0–100
+  }
+
+  // Wait a moment for dashboard.js to create `chart`, then keep it in sync
+  setTimeout(function () {
+    refresh3dsMaxChart();
+    setInterval(refresh3dsMaxChart, 5000);
+  }, 1000);
+</script>
+
 </body>
 
 </html>

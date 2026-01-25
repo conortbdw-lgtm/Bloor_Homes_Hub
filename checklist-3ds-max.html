@@ -467,10 +467,8 @@
 					}
 					fileContent += "\n";
 				});
-
 				fileContent += "=".repeat(60) + "\n";
 				fileContent += "Completed: " + document.getElementById('completed').textContent + " / " + document.getElementById('total').textContent + "\n";
-
 				// Create and download file
 				const element = document.createElement('a');
 				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
@@ -480,7 +478,6 @@
 				element.click();
 				document.body.removeChild(element);
 			}
-
 			// Load checklist state from localStorage
 			function loadChecklist() {
 				const saved = localStorage.getItem('checklistState');
@@ -495,7 +492,6 @@
 				}
 				updateProgress();
 			}
-
 			// Clear all checkboxes
 			function clearChecklist() {
 				if (confirm('Are you sure you want to clear all items?')) {
@@ -505,14 +501,38 @@
 					updateProgress();
 				}
 			}
-
 			// Add event listeners to all checkboxes
 			document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 				checkbox.addEventListener('change', updateProgress);
 			});
-
 			// Load saved state on page load
 			window.addEventListener('load', loadChecklist);
 		</script>
+		<script>
+  // Export current progress into localStorage for the dashboard
+  function exportChecklistProgress() {
+    const completed = parseInt(document.getElementById('completed').textContent, 10) || 0;
+    const total = parseInt(document.getElementById('total').textContent, 10) || 0;
+    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    localStorage.setItem('checklist3dsMaxProgress', JSON.stringify({
+      completed,
+      total,
+      percent
+    }));
+  }
+
+  // Wrap the existing updateProgress so it also exports to localStorage
+  const originalUpdateProgress = updateProgress;
+  updateProgress = function () {
+    originalUpdateProgress();   // your existing logic that updates completed/total
+    exportChecklistProgress();  // new: save values for the dashboard
+  };
+
+  // Ensure progress is exported once on page load after loadChecklist runs
+  window.addEventListener('load', function () {
+    updateProgress();
+  });
+</script>
 	</body>
 </html>

@@ -106,59 +106,51 @@ $(function () {
 
 
   // =====================================
-  // Breakup
-  // =====================================
-  var breakup = {
-    color: "#adb5bd",
-    series: [38, 40, 25],
-    labels: ["2022", "2021", "2020"],
-    chart: {
-      width: 180,
-      type: "donut",
-      fontFamily: "Plus Jakarta Sans', sans-serif",
-      foreColor: "#adb0bb",
-    },
-    plotOptions: {
-      pie: {
-        startAngle: 0,
-        endAngle: 360,
-        donut: {
-          size: '75%',
-        },
+// Breakup (3DS Max Progress)
+// =====================================
+var breakup = {
+  series: [0], // placeholder, will be updated from localStorage
+  labels: ["3DS Max"],
+  chart: {
+    height: 260,
+    type: "radialBar",
+    fontFamily: "Plus Jakarta Sans', sans-serif",
+    foreColor: "#adb0bb",
+  },
+  plotOptions: {
+    radialBar: {
+      hollow: {
+        size: "70%",
       },
-    },
-    stroke: {
-      show: false,
-    },
-
-    dataLabels: {
-      enabled: false,
-    },
-
-    legend: {
-      show: false,
-    },
-    colors: ["#5D87FF", "#ecf2ff", "#F9F9FD"],
-
-    responsive: [
-      {
-        breakpoint: 991,
-        options: {
-          chart: {
-            width: 150,
+      track: {
+        background: "#ecf2ff",
+      },
+      dataLabels: {
+        name: {
+          show: true,
+          fontSize: "14px",
+        },
+        value: {
+          show: true,
+          fontSize: "18px",
+          formatter: function (val) {
+            return Math.round(val) + "%"; // show as percent
           },
         },
+        total: {
+          show: false,
+        },
       },
-    ],
-    tooltip: {
-      theme: "dark",
-      fillSeriesColor: false,
     },
-  };
+  },
+  colors: ["#5D87FF"], // your theme blue
+  stroke: {
+    lineCap: "round",
+  },
+};
 
-  var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-  chart.render();
-
+var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
+chart.render();
 
 
   // =====================================
