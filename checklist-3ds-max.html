@@ -439,7 +439,6 @@
 			function downloadChecklist() {
 				let fileContent = "UX CHECKLIST - " + new Date().toLocaleString() + "\n";
 				fileContent += "=".repeat(60) + "\n\n";
-
 				// Get all sections
 				const sections = document.querySelectorAll('.section-title');
 
@@ -508,31 +507,5 @@
 			// Load saved state on page load
 			window.addEventListener('load', loadChecklist);
 		</script>
-		<script>
-  // Export current progress into localStorage for the dashboard
-  function exportChecklistProgress() {
-    const completed = parseInt(document.getElementById('completed').textContent, 10) || 0;
-    const total = parseInt(document.getElementById('total').textContent, 10) || 0;
-    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-    localStorage.setItem('checklist3dsMaxProgress', JSON.stringify({
-      completed,
-      total,
-      percent
-    }));
-  }
-
-  // Wrap the existing updateProgress so it also exports to localStorage
-  const originalUpdateProgress = updateProgress;
-  updateProgress = function () {
-    originalUpdateProgress();   // your existing logic that updates completed/total
-    exportChecklistProgress();  // new: save values for the dashboard
-  };
-
-  // Ensure progress is exported once on page load after loadChecklist runs
-  window.addEventListener('load', function () {
-    updateProgress();
-  });
-</script>
 	</body>
 </html>

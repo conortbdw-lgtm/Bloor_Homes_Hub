@@ -397,48 +397,12 @@
 		  </div>
 		</div>
 	  </div>
-	<script src="src/assets/libs/jquery/dist/jquery.min.js"></script>
-  	<script src="src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  	<script src="src/assets/js/sidebarmenu.js"></script>
-  	<script src="src/assets/js/app.min.js"></script>
-  	<script src="src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  	<script src="src/assets/libs/simplebar/dist/simplebar.js"></script>
-  	<script src="src/assets/js/dashboard.js"></script>
-	<script>
-  // Read progress saved by checklist-3ds-max.html
-  function get3dsMaxProgress() {
-    try {
-      const raw = localStorage.getItem('checklist3dsMaxProgress');
-      if (!raw) return { completed: 0, total: 0, percent: 0 };
-      const data = JSON.parse(raw);
-      return {
-        completed: data.completed || 0,
-        total: data.total || 0,
-        percent: data.percent || 0
-      };
-    } catch (e) {
-      return { completed: 0, total: 0, percent: 0 };
-    }
-  }
-
-  function refresh3dsMaxChart() {
-    // radialBar chart created in dashboard.js
-    if (typeof chart === 'undefined') return;
-
-    const p = get3dsMaxProgress();
-    const percent = p.percent || 0;
-
-    // Update the single radial bar value
-    chart.updateSeries([percent]); // e.g. 0–100
-  }
-
-  // Wait a moment for dashboard.js to create `chart`, then keep it in sync
-  setTimeout(function () {
-    refresh3dsMaxChart();
-    setInterval(refresh3dsMaxChart, 5000);
-  }, 1000);
-</script>
-
-</body>
-
+		<script src="src/assets/libs/jquery/dist/jquery.min.js"></script>
+  		<script src="src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  		<script src="src/assets/js/sidebarmenu.js"></script>
+  		<script src="src/assets/js/app.min.js"></script>
+  		<script src="src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+  		<script src="src/assets/libs/simplebar/dist/simplebar.js"></script>
+  		<script src="src/assets/js/dashboard.js"></script>
+		</body>
 </html>
