@@ -427,14 +427,49 @@
 				saveChecklistLocal();
 			}
 			// Save checklist state to localStorage (for auto-save)
-			function saveChecklistLocal() {
-				const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-				const state = {};
-				checkboxes.forEach(checkbox => {
-					state[checkbox.id] = checkbox.checked;
-				});
-				localStorage.setItem('checklistState', JSON.stringify(state));
+			function saveChecklistLocal(slot = null) {
+  				const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  				const completed = document.querySelectorAll('input[type="checkbox"]:checked').length;
+  				const total = checkboxes.length;
+  				const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  
+				const state = { percentage };  // Save percentage first
+  					checkboxes.forEach(checkbox => {
+    					state[checkbox.id] = checkbox.checked;
+  					});
+  
+  				const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
+  					localStorage.setItem(key, JSON.stringify(state));
+				}
+			// Load checklist state from localStorage
+			function loadChecklist() {
+				const saved = localStorage.getItem('checklist3dsMaxState');
+				if (saved) {
+					const state = JSON.parse(saved);
+					Object.keys(state).forEach(id => {
+						const checkbox = document.getElementById(id);
+						if (checkbox) {
+							checkbox.checked = state[id];
+						}
+					});
+				}
+				updateProgress();
 			}
+			// Clear all checkboxes
+			function clearChecklist() {
+				if (confirm('Are you sure you want to clear all items?')) {
+					document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+						checkbox.checked = false;
+					});
+					updateProgress();
+				}
+			}
+			// Add event listeners to all checkboxes
+			document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+				checkbox.addEventListener('change', updateProgress);
+			});
+			// Load saved state on page load
+			window.addEventListener('load', loadChecklist);
 			// Download checklist as .txt file
 			function downloadChecklist() {
 				let fileContent = "UX CHECKLIST - " + new Date().toLocaleString() + "\n";
@@ -477,35 +512,6 @@
 				element.click();
 				document.body.removeChild(element);
 			}
-			// Load checklist state from localStorage
-			function loadChecklist() {
-				const saved = localStorage.getItem('checklistState');
-				if (saved) {
-					const state = JSON.parse(saved);
-					Object.keys(state).forEach(id => {
-						const checkbox = document.getElementById(id);
-						if (checkbox) {
-							checkbox.checked = state[id];
-						}
-					});
-				}
-				updateProgress();
-			}
-			// Clear all checkboxes
-			function clearChecklist() {
-				if (confirm('Are you sure you want to clear all items?')) {
-					document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-						checkbox.checked = false;
-					});
-					updateProgress();
-				}
-			}
-			// Add event listeners to all checkboxes
-			document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-				checkbox.addEventListener('change', updateProgress);
-			});
-			// Load saved state on page load
-			window.addEventListener('load', loadChecklist);
 		</script>
 	</body>
 </html>

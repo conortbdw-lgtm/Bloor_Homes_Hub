@@ -1,158 +1,61 @@
 $(function () {
 
 
-  // =====================================
-  // Profit
-  // =====================================
-  var chart = {
-    series: [
-      { name: "Earnings this month:", data: [355, 390, 300, 350, 390, 180, 355, 390] },
-      { name: "Expense this month:", data: [280, 250, 325, 215, 250, 310, 280, 250] },
-    ],
-
-    chart: {
-      type: "bar",
-      height: 345,
-      offsetX: -15,
-      toolbar: { show: true },
-      foreColor: "#adb0bb",
-      fontFamily: 'inherit',
-      sparkline: { enabled: false },
-    },
-
-
-    colors: ["#5D87FF", "#49BEFF"],
-
-
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: "35%",
-        borderRadius: [6],
-        borderRadiusApplication: 'end',
-        borderRadiusWhenStacked: 'all'
-      },
-    },
-    markers: { size: 0 },
-
-    dataLabels: {
-      enabled: false,
-    },
-
-
-    legend: {
-      show: false,
-    },
-
-
-    grid: {
-      borderColor: "rgba(0,0,0,0.1)",
-      strokeDashArray: 3,
-      xaxis: {
-        lines: {
-          show: false,
-        },
-      },
-    },
-
-    xaxis: {
-      type: "category",
-      categories: ["16/08", "17/08", "18/08", "19/08", "20/08", "21/08", "22/08", "23/08"],
-      labels: {
-        style: { cssClass: "grey--text lighten-2--text fill-color" },
-      },
-    },
-
-
-    yaxis: {
-      show: true,
-      min: 0,
-      max: 400,
-      tickAmount: 4,
-      labels: {
-        style: {
-          cssClass: "grey--text lighten-2--text fill-color",
-        },
-      },
-    },
-    stroke: {
-      show: true,
-      width: 3,
-      lineCap: "butt",
-      colors: ["transparent"],
-    },
-
-
-    tooltip: { theme: "light" },
-
-    responsive: [
-      {
-        breakpoint: 600,
-        options: {
-          plotOptions: {
-            bar: {
-              borderRadius: 3,
-            }
-          },
-        }
-      }
-    ]
-
-
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart"), chart);
-  chart.render();
-
-
-  // =====================================
-// Breakup (3DS Max Progress)
+  // Get checklist percentage function (shared with index.html)
+  	function getChecklistPercentage(slot = null) {
+    	const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
 // =====================================
-var breakup = {
-  series: [0], // placeholder, will be updated from localStorage
-  labels: ["3DS Max"],
-  chart: {
-    height: 260,
-    type: "radialBar",
-    fontFamily: "Plus Jakarta Sans', sans-serif",
-    foreColor: "#adb0bb",
-  },
-  plotOptions: {
-    radialBar: {
-      hollow: {
-        size: "70%",
-      },
-      track: {
-        background: "#ecf2ff",
-      },
-      dataLabels: {
-        name: {
-          show: true,
-          fontSize: "14px",
-        },
-        value: {
-          show: true,
-          fontSize: "18px",
-          formatter: function (val) {
-            return Math.round(val) + "%"; // show as percent
-          },
-        },
-        total: {
-          show: false,
-        },
-      },
-    },
-  },
-  colors: ["#5D87FF"], // your theme blue
-  stroke: {
-    lineCap: "round",
-  },
-};
-
-var chart = new ApexCharts(document.querySelector("#breakup"), breakup);
-chart.render();
+// Breakup (BricsCAD Progress)
+// =====================================
 
 
+// =====================================
+  // Breakup2 (3DS Max) - Dynamic from checklist
+  // =====================================
+	const initialPercentage = getChecklistPercentage();
+	var breakup2 = {
+		series: [initialPercentage],  // Loads saved checklist %
+    	labels: ["3DS Max"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+  	window.breakup2Chart = new ApexCharts(document.querySelector("#breakup2"), breakup2);  // Global for updates
+  	window.breakup2Chart.render();
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklist3dsMaxState')) {
+  			const perc = getChecklistPercentage();
+      		window.breakup2Chart.updateOptions({ series: [perc] });
+    	}
+  	});
   // =====================================
   // Earning
   // =====================================
