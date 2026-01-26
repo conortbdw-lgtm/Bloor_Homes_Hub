@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<title>
+			Checklist - 3DS Max
+		</title>
+  		<link rel="shortcut icon" type="image/png" href="src/assets/images/logos/favicon.png" />
+  		<link rel="stylesheet" href="src/assets/css/styles.min.css" />
+		<style>
+			.checklist-container {
+				max-width: 800px;
+				margin: 0 auto;
+			}
+			.checklist-item {
+				display: flex;
+				align-items: center;
+				padding: 12px 0;
+				border-bottom: 1px solid #e0e0e0;
+			}
+			.checklist-item:last-child {
+				border-bottom: none;
+			}
+			.checklist-item input[type="checkbox"] {
+				width: 20px;
+				height: 20px;
+				margin-right: 12px;
+				cursor: pointer;
+			}
+			.checklist-item label {
+				flex-grow: 1;
+				cursor: pointer;
+				margin: 0;
+				user-select: none;
+			}
+			.checklist-item input[type="checkbox"]:checked + label {
+				text-decoration: line-through;
+				color: #999;
+			}
+			.checklist-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 20px;
+			}
+			.checklist-progress {
+				font-size: 14px;
+				color: #666;
+			}
+			.btn-clear {
+				background-color: #fa896b;
+				color: white;
+				border: none;
+				padding: 8px 16px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+			.btn-clear:hover {
+				background-color: #e8756f;
+			}
+			.section-title {
+				margin-top: 30px;
+				margin-bottom: 15px;
+				font-size: 18px;
+				font-weight: 600;
+				color: #2a3547;
+				padding-bottom: 10px;
+				border-bottom: 2px solid #5d87ff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+		data-sidebar-position="fixed" data-header-position="fixed">
+			<aside class="left-sidebar">
+				<div>
+					<div class="brand-logo d-flex align-items-center justify-content-between ">
+						<a href="./index.html" class="">
+							<img src="src/assets/images/logos/Bloor_Logo_SVG.svg" width="150" alt="" />
+						</a>
+						<div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+							<i class="ti ti-x fs-8"></i>
+						</div>
+					</div>
+					<nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+						<ul id="sidebarnav">
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./index.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-layout-dashboard"></i>
+									</span>
+									<span class="hide-menu">
+										Home
+									</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./checklists.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-check"></i>
+									</span>
+									<span class="hide-menu">
+										Checklists
+									</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./scene-files.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-3d-cube-sphere"></i>
+									</span>
+									<span class="hide-menu">
+										Scene Files
+									</span>
+								</a>
+							</li>
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="./index.html" aria-expanded="false">
+									<span>
+										<i class="ti ti-3d-cube-sphere"></i>
+									</span>
+									<span class="hide-menu">
+										Documentation
+									</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</aside>
+			<div class="body-wrapper">
+      			<header class="app-header">
+					<nav class="navbar navbar-expand-lg navbar-light">
+						<ul class="navbar-nav">
+							<li class="nav-item d-block d-xl-none">
+								<a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+									<i class="ti ti-menu-2"></i>
+								</a>
+							</li>
+						</ul>
+						<h5 class="card-title fw-semibold">
+							Spin - Checklist
+						</h5>
+					</nav>
+				</header>
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<div class="card">
+							<div class="card-body">
+								<div class="checklist-container">
+									<div class="checklist-header">
+										<h3 class="card-title fw-semibold">
+											Spin - Scene File
+										</h3>
+										<span class="checklist-progress">
+											<span id="completed">0</span> / <span id="total">0</span> completed
+										</span>
+									</div>
+									<div class="section-title">
+										Setup
+									</div>
+									<div id="prep-section">
+										<div class="checklist-item">
+											<input type="checkbox" id="item3">
+											<label for="item3">
+												Import your Google Maps Latitude and Lonitude into MapPuzzle.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item3">
+											<label for="item3">
+												Download your High Res inner map (8192pxx8192px - Zoom 19)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item3">
+											<label for="item3">
+												Download your Low Res outer map (8192pxx8192px - Zoom 17)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item3">
+											<label for="item3">
+												Perform your color correction as required to match to Precedent iamge.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item3">
+											<label for="item3">
+												Set up your Google Maps, Surrounding Trees and any other accompanying FP/Railclone/Geometry within the Externals file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item4">
+											<label for="item4">
+												Import the SpinCam rig and UX Lighting rig from "Bloor_New_UX_Template.max"
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item4">
+											<label for="item4">
+												Align SpinCam to site and rotate the UX Lighting Rig to line if with Lighting/Shadows on the Google Maps.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item1">
+											<label for="item1">
+												Copy "Bloor_New_Spin_Template.max" To your project folder.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item2">
+											<label for="item2">
+												Rename in this format ""00000-00 - Job Name - Spin"
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item2">
+											<label for="item2">
+												Import Merge the Spin Cam and Lighting rig from the Externals file into this empt template file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item2">
+											<label for="item2">
+												Once imported and saved, delete the SpinCam and Lighitng rig frm the Externals file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item2">
+											<label for="item2">
+												xRef in the Externals file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item2">
+											<label for="item2">
+												xRef in the Buildings file.
+											</label>
+										</div>
+									</div>
+									<div class="section-title">
+										Site - Geometry
+									</div>
+									<div id="geometry-section">
+										<div class="checklist-item">
+											<input type="checkbox" id="item5">
+											<label for="item5">
+												Link BricsCAD project file
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item6">
+											<label for="item6">
+												Level all Roads, Paths, Shared, Private Driveways
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item7">
+											<label for="item7">
+												Build all front of house paths and rear patios (Apply an extrude modifier of -100mm)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item8">
+											<label for="item8">
+												Build all grassed areas
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item9">
+											<label for="item9">
+												Build all Leap/POS Areas if required (Populate with leap equipment)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item10">
+											<label for="item10">
+												Apply surface materials, link all distance textures.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item11">
+											<label for="item11">
+												Add in all drop kerbs to geometry only (Drop kerbs to be 900mm/1000mm long)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item12">
+											<label for="item12">
+												Add in all kerbs (Take splines needed for the Kerbs from existing geo, this helps prevent gaps)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item13">
+											<label for="item13">
+												Add in all edging (Take splines needed for the Kerbs from existing geo, this helps prevent gaps)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item14">
+											<label for="item14">
+												Select all grass surfaces by material then drop by -25mm
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item15">
+											<label for="item15">
+												Add in Pumping Stations (If applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item16">
+											<label for="item16">
+												Add in all Tactile Paving/Corduroy decals
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item17">
+											<label for="item17">
+												Add in road signage (EG. Cycle path Start/End)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item18">
+											<label for="item18">
+												Import and level all Meter boxes and EV Chargers
+											</label>
+										</div>
+									</div>
+									<div class="section-title">
+										Site - Railclone
+									</div>
+									<div id="railclone-section">
+										<div class="checklist-item">
+											<input type="checkbox" id="item19">
+											<label for="item19">
+												Retaining Walls/Flag on Edges
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item20">
+											<label for="item20">
+												Screen Walls
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item21">
+											<label for="item21">
+												Fences (Standard Details may vary check plans)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item22">
+											<label for="item22">
+												Knee Railing (If applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item23">
+											<label for="item23">
+												Estate Railings (If applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item24">
+											<label for="item24">
+												Box Railings next to steps (Steps of 3 or more require handrails on one side)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item25">
+											<label for="item25">
+												VR Hoarding
+											</label>
+										</div>
+									</div>
+									<div class="section-title">
+										Site - Forest Pack
+									</div>
+									<div id="forest-section">
+										<div class="checklist-item">
+											<input type="checkbox" id="item26">
+											<label for="item26">
+												Shrubs
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item27">
+											<label for="item27">
+												Hedges
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item28">
+											<label for="item28">
+												Cars
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item29">
+											<label for="item29">
+												Trees (Site/Greenspace)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item30">
+											<label for="item30">
+												Climbers (If Applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item31">
+											<label for="item31">
+												Sheds/Cycle Sheds (If Applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item32">
+											<label for="item32">
+												ASHP's (If Applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item33">
+											<label for="item33">
+												EV Chargers on posts
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item34">
+											<label for="item34">
+												Grass Standard (To small grass areas)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item35">
+											<label for="item35">
+												Grass Greenspace (To large grass areas)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item36">
+											<label for="item36">
+												Meadow Grass (If Applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item37">
+											<label for="item37">
+												Bulb Planting (If Applicable)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item38">
+											<label for="item38">
+												Any remaining planting (Native Shrubs, Swale, Aquatic Planting etc)
+											</label>
+										</div>
+									</div>
+									<div style="margin-top: 30px; display: flex; gap: 10px;">
+										<button class="btn btn-primary" onclick="downloadChecklist()">
+											📥 Download as .txt
+										</button>
+										<button class="btn-clear" onclick="clearChecklist()">
+											Clear All
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+      			</div>
+			</div>
+		</div>
+  		<script src="src/assets/libs/jquery/dist/jquery.min.js"></script>
+		<script src="src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="src/assets/js/sidebarmenu.js"></script>
+		<script src="src/assets/js/app.min.js"></script>
+		<script src="src/assets/libs/simplebar/dist/simplebar.js"></script>
+		<script>
+			// Update progress counter
+			function updateProgress() {
+				const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+				const completed = document.querySelectorAll('input[type="checkbox"]:checked').length;
+				document.getElementById('completed').textContent = completed;
+				document.getElementById('total').textContent = checkboxes.length;
+			// Save to localStorage
+				saveChecklistLocal();
+			}
+			// Save checklist state to localStorage (for auto-save)
+			function saveChecklistLocal(slot = null) {
+  				const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  				const completed = document.querySelectorAll('input[type="checkbox"]:checked').length;
+  				const total = checkboxes.length;
+  				const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+  
+				const state = { percentage };  // Save percentage first
+  					checkboxes.forEach(checkbox => {
+    					state[checkbox.id] = checkbox.checked;
+  					});
+  
+  				const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
+  					localStorage.setItem(key, JSON.stringify(state));
+				}
+			// Load checklist state from localStorage
+			function loadChecklist() {
+				const saved = localStorage.getItem('checklist3dsMaxState');
+				if (saved) {
+					const state = JSON.parse(saved);
+					Object.keys(state).forEach(id => {
+						const checkbox = document.getElementById(id);
+						if (checkbox) {
+							checkbox.checked = state[id];
+						}
+					});
+				}
+				updateProgress();
+			}
+			// Clear all checkboxes
+			function clearChecklist() {
+				if (confirm('Are you sure you want to clear all items?')) {
+					document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+						checkbox.checked = false;
+					});
+					updateProgress();
+				}
+			}
+			// Add event listeners to all checkboxes
+			document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+				checkbox.addEventListener('change', updateProgress);
+			});
+			// Load saved state on page load
+			window.addEventListener('load', loadChecklist);
+			// Download checklist as .txt file
+			function downloadChecklist() {
+				let fileContent = "UX CHECKLIST - " + new Date().toLocaleString() + "\n";
+				fileContent += "=".repeat(60) + "\n\n";
+				// Get all sections
+				const sections = document.querySelectorAll('.section-title');
+
+				sections.forEach(section => {
+					const sectionTitle = section.textContent.trim();
+					fileContent += sectionTitle + "\n";
+					fileContent += "-".repeat(40) + "\n";
+
+					// Get the next div (the section container)
+					let sectionContainer = section.nextElementSibling;
+
+					// If it's a div with id, get all checklist items from it
+					if (sectionContainer && sectionContainer.id) {
+						const items = sectionContainer.querySelectorAll('.checklist-item');
+
+						items.forEach(item => {
+							const checkbox = item.querySelector('input[type="checkbox"]');
+							const label = item.querySelector('label');
+
+							if (checkbox && label) {
+								const status = checkbox.checked ? "✓ DONE" : "✗ TODO";
+								fileContent += `[${status}] ${label.textContent.trim()}\n`;
+							}
+						});
+					}
+					fileContent += "\n";
+				});
+				fileContent += "=".repeat(60) + "\n";
+				fileContent += "Completed: " + document.getElementById('completed').textContent + " / " + document.getElementById('total').textContent + "\n";
+				// Create and download file
+				const element = document.createElement('a');
+				element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileContent));
+				element.setAttribute('download', 'checklist_' + new Date().getTime() + '.txt');
+				element.style.display = 'none';
+				document.body.appendChild(element);
+				element.click();
+				document.body.removeChild(element);
+			}
+		</script>
+	</body>
+</html>
