@@ -27,6 +27,15 @@ $(function () {
     	}
     	return 0;
   	}
+	function getChecklistPercentage4(slot = null) {
+    	const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
 	// =====================================
   	// Breakup1 (BricsCAD) - Dynamic from checklist
   	// =====================================
@@ -145,6 +154,46 @@ $(function () {
 		if (e.key && e.key.startsWith('checklistQC1State')) {
   			const perc = getChecklistPercentage3();
       		window.breakup3Chart.updateOptions({ series: [perc] });
+    	}
+	});
+	// =====================================
+  	// Breakup4 (Scene File - Spin) - Dynamic from checklist
+  	// =====================================
+	const initialPercentage4 = getChecklistPercentage4();
+	var breakup4 = {
+		series: [initialPercentage4],  // Loads saved checklist %
+    	labels: ["Scene File - Spin"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+	window.breakup4Chart = new ApexCharts(document.querySelector("#breakup4"), breakup4);  // Global for updates
+  	window.breakup4Chart.render();
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklistSFSpin')) {
+  			const perc = getChecklistPercentage4();
+      		window.breakup4Chart.updateOptions({ series: [perc] });
     	}
 	});
 })
