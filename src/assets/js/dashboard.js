@@ -36,6 +36,15 @@ $(function () {
     	}
     	return 0;
   	}
+	function getChecklistPercentage5(slot = null) {
+    	const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
 	// =====================================
   	// Breakup1 (BricsCAD) - Dynamic from checklist
   	// =====================================
@@ -194,6 +203,46 @@ $(function () {
 		if (e.key && e.key.startsWith('checklistSFSpin')) {
   			const perc = getChecklistPercentage4();
       		window.breakup4Chart.updateOptions({ series: [perc] });
+    	}
+	});
+	// =====================================
+  	// Breakup5 (Testing - Externals) - Dynamic from checklist
+  	// =====================================
+	const initialPercentage5 = getChecklistPercentage5();
+	var breakup5 = {
+		series: [initialPercentage5],  // Loads saved checklist %
+    	labels: ["Testing - Externals"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+	window.breakup5Chart = new ApexCharts(document.querySelector("#breakup5"), breakup5);  // Global for updates
+  	window.breakup5Chart.render();
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklistTestExternals')) {
+  			const perc = getChecklistPercentage5();
+      		window.breakup5Chart.updateOptions({ series: [perc] });
     	}
 	});
 })

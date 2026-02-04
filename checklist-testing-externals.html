@@ -448,12 +448,12 @@
     					state[checkbox.id] = checkbox.checked;
   					});
   
-  				const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
+  				const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
   					localStorage.setItem(key, JSON.stringify(state));
 				}
 			// Load checklist state from localStorage
 			function loadChecklist() {
-				const saved = localStorage.getItem('checklistSFSpin');
+				const saved = localStorage.getItem('checklistTestExternals');
 				if (saved) {
 					const state = JSON.parse(saved);
 					Object.keys(state).forEach(id => {
