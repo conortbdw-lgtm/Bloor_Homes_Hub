@@ -1,5 +1,64 @@
 $(function () {
-  // Get checklist percentage function (shared with index.html)
+
+	// Get checklist percentage functions (shared with index.html)
+	// Status text helpers for Testing - Externals
+	function getChecklistStatusText(percent) {
+    	if (percent === 0) return 'Not started';
+    	if (percent === 100) return 'Complete';
+    	return 'In Progress';
+  	}
+	
+  	function updateTestingExternalsStatus() {
+    	const percent = getChecklistPercentage5();
+    	const status = getChecklistStatusText(percent);
+    	const titleEl = document.getElementById('testing-externals-status');
+    	if (titleEl) {
+      		titleEl.textContent = status;
+		}
+	}
+
+  	function updateSceneFileSpinStatus() {
+    	const percent = getChecklistPercentage4();
+    	const status = getChecklistStatusText(percent);
+    	const titleEl = document.getElementById('scene-file-spin-status');
+    	if (titleEl) {
+      		titleEl.textContent = status;
+    	}
+  	}
+	
+	function updateBricscadStatus() {
+  		const percent = getChecklistPercentage2(); // BricsCAD
+  		const status = getChecklistStatusText(percent);
+  		const titleEl = document.getElementById('bricscad-status');
+  		if (titleEl) {
+    		titleEl.textContent = status;
+  		}
+	}
+
+	function updateMaxStatus() {
+  		const percent = getChecklistPercentage(); // 3DS Max
+  		const status = getChecklistStatusText(percent);
+  		const titleEl = document.getElementById('max-status');
+  		if (titleEl) {
+    		titleEl.textContent = status;
+  		}
+	}
+
+	function updateQc1Status() {
+  		const percent = getChecklistPercentage3(); // QC1
+  		const status = getChecklistStatusText(percent);
+  		const titleEl = document.getElementById('qc1-status');
+  		if (titleEl) {
+    		titleEl.textContent = status;
+  		}
+	}
+	
+ 	updateTestingExternalsStatus();
+	updateSceneFileSpinStatus();
+	updateBricscadStatus();
+	updateMaxStatus();
+	updateQc1Status();
+	
   	function getChecklistPercentage(slot = null) {
     	const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
     	const saved = localStorage.getItem(key);
@@ -9,42 +68,47 @@ $(function () {
     	}
     	return 0;
   	}
-	function getChecklistPercentage2(slot = null) {
-    	const key = slot ? `checklistBricscadState${slot}` : 'checklistBricscadState';
-    	const saved = localStorage.getItem(key);
-    	if (saved) {
-      		const state = JSON.parse(saved);
-      		return state.percentage || 0;
-    	}
-    	return 0;
-  	}
-	function getChecklistPercentage3(slot = null) {
-    	const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
-    	const saved = localStorage.getItem(key);
-    	if (saved) {
-      		const state = JSON.parse(saved);
-      		return state.percentage || 0;
-    	}
-    	return 0;
-  	}
+
+  function getChecklistPercentage2(slot = null) {
+    const key = slot ? `checklistBricscadState${slot}` : 'checklistBricscadState';
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      const state = JSON.parse(saved);
+      return state.percentage || 0;
+    }
+    return 0;
+  }
+
+  function getChecklistPercentage3(slot = null) {
+    const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      const state = JSON.parse(saved);
+      return state.percentage || 0;
+    }
+    return 0;
+  }
+
 	function getChecklistPercentage4(slot = null) {
-    	const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
-    	const saved = localStorage.getItem(key);
-    	if (saved) {
-      		const state = JSON.parse(saved);
-      		return state.percentage || 0;
-    	}
+    		const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
+    		const saved = localStorage.getItem(key);
+    		if (saved) {
+      			const state = JSON.parse(saved);
+      			return state.percentage || 0;
+    		}
     	return 0;
   	}
-	function getChecklistPercentage5(slot = null) {
-    	const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
-    	const saved = localStorage.getItem(key);
-    	if (saved) {
-      		const state = JSON.parse(saved);
-      		return state.percentage || 0;
-    	}
-    	return 0;
-  	}
+
+  function getChecklistPercentage5(slot = null) {
+    const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      const state = JSON.parse(saved);
+      return state.percentage || 0;
+    }
+    return 0;
+  }
+
 	// =====================================
   	// Breakup1 (BricsCAD) - Dynamic from checklist
   	// =====================================
@@ -79,11 +143,12 @@ $(function () {
 	window.breakup1Chart = new ApexCharts(document.querySelector("#breakup1"), breakup1);  // Global for updates
   	window.breakup1Chart.render();
   	// Auto-update when checklist saves (cross-tab)
-  	window.addEventListener('storage', (e) => {
+	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklistBricscadState')) {
   			const perc = getChecklistPercentage2();
-      		window.breakup1Chart.updateOptions({ series: [perc] });
-    	}
+  			window.breakup1Chart.updateOptions({ series: [perc] });
+  			updateBricscadStatus();
+		}
 	});
 	// =====================================
   	// Breakup2 (3DS Max) - Dynamic from checklist
@@ -122,8 +187,9 @@ $(function () {
   	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklist3dsMaxState')) {
   			const perc = getChecklistPercentage();
-      		window.breakup2Chart.updateOptions({ series: [perc] });
-    	}
+  			window.breakup2Chart.updateOptions({ series: [perc] });
+  			updateMaxStatus();
+		}
 	});
 	// =====================================
   	// Breakup3 (QC1) - Dynamic from checklist
@@ -162,8 +228,9 @@ $(function () {
   	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklistQC1State')) {
   			const perc = getChecklistPercentage3();
-      		window.breakup3Chart.updateOptions({ series: [perc] });
-    	}
+  			window.breakup3Chart.updateOptions({ series: [perc] });
+  			updateQc1Status();
+		}
 	});
 	// =====================================
   	// Breakup4 (Scene File - Spin) - Dynamic from checklist
@@ -205,6 +272,13 @@ $(function () {
       		window.breakup4Chart.updateOptions({ series: [perc] });
     	}
 	});
+	window.addEventListener('storage', (e) => {
+  		if (e.key && e.key.startsWith('checklist-sf-spin-status')) {
+    		const perc = getChecklistPercentage4();
+    		window.breakup4Chart.updateOptions({ series: [perc] });
+    		updateTestingExternalsStatus();
+  		}
+	});
 	// =====================================
   	// Breakup5 (Testing - Externals) - Dynamic from checklist
   	// =====================================
@@ -239,10 +313,11 @@ $(function () {
 	window.breakup5Chart = new ApexCharts(document.querySelector("#breakup5"), breakup5);  // Global for updates
   	window.breakup5Chart.render();
   	// Auto-update when checklist saves (cross-tab)
-  	window.addEventListener('storage', (e) => {
-		if (e.key && e.key.startsWith('checklistTestExternals')) {
-  			const perc = getChecklistPercentage5();
-      		window.breakup5Chart.updateOptions({ series: [perc] });
-    	}
+	window.addEventListener('storage', (e) => {
+  		if (e.key && e.key.startsWith('checklistTestExternals')) {
+    		const perc = getChecklistPercentage5();
+    		window.breakup5Chart.updateOptions({ series: [perc] });
+    		updateTestingExternalsStatus();
+  		}
 	});
 })
