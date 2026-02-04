@@ -52,22 +52,12 @@ $(function () {
     		titleEl.textContent = status;
   		}
 	}
-
-	function updatePLHandoverStatus() {
-  		const percent = getChecklistPercentage6(); // PL Handover
-  		const status = getChecklistStatusText(percent);
-  		const titleEl = document.getElementById('pl-handover-status');
-  		if (titleEl) {
-    		titleEl.textContent = status;
-  		}
-	}
 	
  	updateTestingExternalsStatus();
 	updateSceneFileSpinStatus();
 	updateBricscadStatus();
 	updateMaxStatus();
 	updateQc1Status();
-	updatePLHandoverStatus();
 	
   	function getChecklistPercentage(slot = null) {
     	const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
@@ -111,16 +101,6 @@ $(function () {
 
   	function getChecklistPercentage5(slot = null) {
     	const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
-    	const saved = localStorage.getItem(key);
-    	if (saved) {
-      		const state = JSON.parse(saved);
-      		return state.percentage || 0;
-    	}
-    	return 0;
-  	}
-
-  	function getChecklistPercentage6(slot = null) {
-    	const key = slot ? `checklistPLHandover${slot}` : 'checklistPLHandover';
     	const saved = localStorage.getItem(key);
     	if (saved) {
       		const state = JSON.parse(saved);
@@ -338,46 +318,5 @@ $(function () {
     		window.breakup5Chart.updateOptions({ series: [perc] });
     		updateTestingExternalsStatus();
   		}
-	});
-	
-  	// Breakup6 (PL Handover) - Dynamic from checklist
-	const initialPercentage6 = getChecklistPercentage6();
-	var breakup6 = {
-		series: [initialPercentage6],  // Loads saved checklist %
-    	labels: ["PL - Handover"],
-    	chart: {
-      		height: 260,
-      		type: "radialBar",
-      		fontFamily: "Plus Jakarta Sans', sans-serif",
-      		foreColor: "#adb0bb",
-    	},
-    	plotOptions: {
-      		radialBar: {
-        		hollow: { size: "70%" },
-        		track: { background: "#ecf2ff" },
-        		dataLabels: {
-          			name: { show: true, fontSize: "14px" },
-          			value: {
-            			show: true,
-            			fontSize: "18px",
-            			formatter: function (val) { return Math.round(val) + "%"; }
-          			},
-          			total: { show: false }
-        		}
-      		}
-    	},
-    	colors: ["#5D87FF"],
-    	stroke: { lineCap: "round" }
-  	};
-  	window.breakup6Chart = new ApexCharts(document.querySelector("#breakup6"), breakup6);  // Global for updates
-  	window.breakup6Chart.render();
-	
-  	// Auto-update when checklist saves (cross-tab)
-  	window.addEventListener('storage', (e) => {
-		if (e.key && e.key.startsWith('checklistPLHandover')) {
-  			const perc = getChecklistPercentage6();
-  			window.breakup6Chart.updateOptions({ series: [perc] });
-  			updateMaxStatus();
-		}
 	});
 })

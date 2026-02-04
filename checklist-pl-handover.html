@@ -141,7 +141,7 @@
 							</li>
 						</ul>
 						<h5 class="card-title fw-semibold">
-							QC - Externals
+							Handover
 						</h5>
 					</nav>
 				</header>
@@ -152,233 +152,79 @@
 								<div class="checklist-container">
 									<div class="checklist-header">
 										<h3 class="card-title fw-semibold">
-											Quality Control
+											Handover to Project Lead
 										</h3>
 										<span class="checklist-progress">
 											<span id="completed">0</span> / <span id="total">0</span> completed
 										</span>
 									</div>
 									<div class="section-title">
-										Geometry
+										Layers
 									</div>
-									<div id="geo-section">
+									<div id="layers-section">
 										<div class="checklist-item">
-											<input type="checkbox" id="item1">
-											<label for="item1">
-												No visible gaps in site
+											<input type="checkbox" id="item35">
+											<label for="item35">
+												Splines used by a FP need to be in the "#FP_Splines" Layer, copying the name of the FP with "_Spline" at the end
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item2">
-											<label for="item2">
-												All Leap/LAP Areas included
+											<input type="checkbox" id="item36">
+											<label for="item36">
+												Splines used by a RC need to be in the "#RC_Splines" Layer, copying the name of the RC with "_Spline" at the end
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item3">
-											<label for="item3">
-												All drop kerbs in place
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item4">
-											<label for="item4">
-												Flag Stone Paving UVWs aligned to paths with Displacement Modifier
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item5">
-											<label for="item5">
-												Where Flag Stone paths are 1200mm, 2x 600mm slabs should be used
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item6">
-											<label for="item6">
-												Minimal Tearing in geo
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item7">
-											<label for="item7">
-												Grass dropped by 25mm
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item8">
-											<label for="item8">
-												Attenuation Basins/Rain Gardens (If applicable)
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item9">
-											<label for="item9">
-												Rear Garden UVWs aligned to HT Rotation
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item10">
-											<label for="item10">
-												Tactile Paving/Corduroy Paving
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item11">
-											<label for="item11">
-												S38 Signage (If applicable)
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item12">
-											<label for="item12">
-												Main Kerbs/Edging reversed away from grass surfaces
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item13">
-											<label for="item13">
-												Parking Edge markers where applicable
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item14">
-											<label for="item14">
-												Pylons along with connecting cables (If none in site, Project Lead will add to maps)
+											<input type="checkbox" id="item37">
+											<label for="item37">
+												Any Site Geometry/Layers should be nested with the "Site_Model" layer
 											</label>
 										</div>
 									</div>
 									<div class="section-title">
-										Boundary Treatments
+										Cleanup
 									</div>
-									<div id="boundary-section">
+									<div id="cleanup-section">
 										<div class="checklist-item">
-											<input type="checkbox" id="item15">
-											<label for="item15">
-												Screen Walls
+											<input type="checkbox" id="item38">
+											<label for="item38">
+												Remove all xrefs, lights and cameras
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item16">
-											<label for="item16">
-												Fencing
+											<input type="checkbox" id="item39">
+											<label for="item39">
+												Ensure all FP's and RC's are enabled, unhidden and in their respective layers
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item17">
-											<label for="item17">
-												Gates
+											<input type="checkbox" id="item40">
+											<label for="item40">
+												Open "Asset Tracker" relink any directories pointing to anywhere other than "\\CGISERVER\"
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item18">
-											<label for="item18">
-												Retaining Walls (If applicable)
+											<input type="checkbox" id="item41">
+											<label for="item41">
+												Run the "IP Corrector" Script to fix any directories with "IP Addresses" or "TBDW" in the directory
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item19">
-											<label for="item19">
-												Knee Rails (If applicable)
+											<input type="checkbox" id="item42">
+											<label for="item42">
+												Run "Relink Bitmaps" to resolve any remaining missing maps
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item20">
-											<label for="item20">
-												Railings (If applicable)
+											<input type="checkbox" id="item43">
+											<label for="item43">
+												Run "Sini Forensics" and remove the following "Empty Layers" and "Animation Layers"
 											</label>
 										</div>
 										<div class="checklist-item">
-											<input type="checkbox" id="item21">
-											<label for="item21">
-												Scan through Boundary Treatment plans for any details which aren't listed above and cross reference
-											</label>
-										</div>
-									</div>
-									<div class="section-title">
-										Landscaping
-									</div>
-									<div id="landscaping-section">
-										<div class="checklist-item">
-											<input type="checkbox" id="item22">
-											<label for="item22">
-												Planting
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item23">
-											<label for="item23">
-												Hedges
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item24">
-											<label for="item24">
-												Gravel (If applicable)
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item25">
-											<label for="item25">
-												Site Trees
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item26">
-											<label for="item26">
-												POS Planting (Meadows/POS Trees/Existing Foliage)
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item27">
-											<label for="item27">
-												POS Details (Benches/Bollards/Bins/Signs etc.)
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item28">
-											<label for="item28">
-												Scan through Landscaping plans for any details which arent listed above and cross reference
-											</label>
-										</div>
-									</div>
-									<div class="section-title">
-										Materials
-									</div>
-									<div id="materials-section">
-										<div class="checklist-item">
-											<input type="checkbox" id="item29">
-											<label for="item29">
-												Unless stated otherwise, Tarmac Driveways should be using the same material as Tarmac Roads
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item30">
-											<label for="item30">
-												All Grass surfaces should have the Real Word Scale UVW Mapping modifier along with the Displacement Modifier
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item31">
-											<label for="item31">
-												All Grass surfaces should be using the new Grass_Distance material with no Material modifiers on top
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item32">
-											<label for="item32">
-												Assign any Camber_Splines to the Camber_Distance nodes within Road/Block Paving Materials
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item33">
-											<label for="item33">
-												Assign any Kerbs/Edging to the 2x Kerb_Distance nodes within Road/Pavement/Block Paving Materials
-											</label>
-										</div>
-										<div class="checklist-item">
-											<input type="checkbox" id="item34">
-											<label for="item34">
-												Assign any Grass/Mulch Surfaces to the Ground_Distance node within the Pavement Material
+											<input type="checkbox" id="item44">
+											<label for="item44">
+												Save and close
 											</label>
 										</div>
 									</div>
@@ -424,12 +270,12 @@
     					state[checkbox.id] = checkbox.checked;
   					});
   
-  				const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
+  				const key = slot ? `checklistPLHandover${slot}` : 'checklistPLHandover';
   					localStorage.setItem(key, JSON.stringify(state));
 				}
 			// Load checklist state from localStorage
 			function loadChecklist() {
-				const saved = localStorage.getItem('checklistQC1State');
+				const saved = localStorage.getItem('checklistPLHandover');
 				if (saved) {
 					const state = JSON.parse(saved);
 					Object.keys(state).forEach(id => {
