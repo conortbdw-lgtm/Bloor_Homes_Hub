@@ -69,25 +69,25 @@ $(function () {
     	return 0;
   	}
 
-  function getChecklistPercentage2(slot = null) {
-    const key = slot ? `checklistBricscadState${slot}` : 'checklistBricscadState';
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      const state = JSON.parse(saved);
-      return state.percentage || 0;
-    }
-    return 0;
-  }
+  	function getChecklistPercentage2(slot = null) {
+    	const key = slot ? `checklistBricscadState${slot}` : 'checklistBricscadState';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
 
-  function getChecklistPercentage3(slot = null) {
-    const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      const state = JSON.parse(saved);
-      return state.percentage || 0;
-    }
-    return 0;
-  }
+  	function getChecklistPercentage3(slot = null) {
+    	const key = slot ? `checklistQC1State${slot}` : 'checklistQC1State';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
 
 	function getChecklistPercentage4(slot = null) {
     		const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
@@ -99,19 +99,17 @@ $(function () {
     	return 0;
   	}
 
-  function getChecklistPercentage5(slot = null) {
-    const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      const state = JSON.parse(saved);
-      return state.percentage || 0;
-    }
-    return 0;
-  }
-
-	// =====================================
+  	function getChecklistPercentage5(slot = null) {
+    	const key = slot ? `checklistTestExternals${slot}` : 'checklistTestExternals';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
+	
   	// Breakup1 (BricsCAD) - Dynamic from checklist
-  	// =====================================
 	const initialPercentage1 = getChecklistPercentage2();
 	var breakup1 = {
 		series: [initialPercentage1],  // Loads saved checklist %
@@ -142,6 +140,7 @@ $(function () {
   	};
 	window.breakup1Chart = new ApexCharts(document.querySelector("#breakup1"), breakup1);  // Global for updates
   	window.breakup1Chart.render();
+	
   	// Auto-update when checklist saves (cross-tab)
 	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklistBricscadState')) {
@@ -150,9 +149,8 @@ $(function () {
   			updateBricscadStatus();
 		}
 	});
-	// =====================================
+	
   	// Breakup2 (3DS Max) - Dynamic from checklist
-  	// =====================================
 	const initialPercentage2 = getChecklistPercentage();
 	var breakup2 = {
 		series: [initialPercentage2],  // Loads saved checklist %
@@ -183,6 +181,7 @@ $(function () {
   	};
   	window.breakup2Chart = new ApexCharts(document.querySelector("#breakup2"), breakup2);  // Global for updates
   	window.breakup2Chart.render();
+	
   	// Auto-update when checklist saves (cross-tab)
   	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklist3dsMaxState')) {
@@ -191,9 +190,8 @@ $(function () {
   			updateMaxStatus();
 		}
 	});
-	// =====================================
+	
   	// Breakup3 (QC1) - Dynamic from checklist
-  	// =====================================
 	const initialPercentage3 = getChecklistPercentage3();
 	var breakup3 = {
 		series: [initialPercentage3],  // Loads saved checklist %
@@ -224,6 +222,7 @@ $(function () {
   	};
   	window.breakup3Chart = new ApexCharts(document.querySelector("#breakup3"), breakup3);  // Global for updates
   	window.breakup3Chart.render();
+	
   	// Auto-update when checklist saves (cross-tab)
   	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklistQC1State')) {
@@ -232,9 +231,8 @@ $(function () {
   			updateQc1Status();
 		}
 	});
-	// =====================================
+	
   	// Breakup4 (Scene File - Spin) - Dynamic from checklist
-  	// =====================================
 	const initialPercentage4 = getChecklistPercentage4();
 	var breakup4 = {
 		series: [initialPercentage4],  // Loads saved checklist %
@@ -265,6 +263,7 @@ $(function () {
   	};
 	window.breakup4Chart = new ApexCharts(document.querySelector("#breakup4"), breakup4);  // Global for updates
   	window.breakup4Chart.render();
+	
   	// Auto-update when checklist saves (cross-tab)
   	window.addEventListener('storage', (e) => {
 		if (e.key && e.key.startsWith('checklistSFSpin')) {
@@ -279,9 +278,8 @@ $(function () {
     		updateTestingExternalsStatus();
   		}
 	});
-	// =====================================
+	
   	// Breakup5 (Testing - Externals) - Dynamic from checklist
-  	// =====================================
 	const initialPercentage5 = getChecklistPercentage5();
 	var breakup5 = {
 		series: [initialPercentage5],  // Loads saved checklist %
@@ -312,6 +310,7 @@ $(function () {
   	};
 	window.breakup5Chart = new ApexCharts(document.querySelector("#breakup5"), breakup5);  // Global for updates
   	window.breakup5Chart.render();
+	
   	// Auto-update when checklist saves (cross-tab)
 	window.addEventListener('storage', (e) => {
   		if (e.key && e.key.startsWith('checklistTestExternals')) {
