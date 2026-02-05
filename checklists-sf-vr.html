@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
   		<meta name="viewport" content="width=device-width, initial-scale=1">
   		<title>
-			Scene File - Spin - Checklist
+			Scene File - VR - Checklist
 		</title>
   		<link rel="shortcut icon" type="image/png" href="src/assets/images/logos/favicon.png" />
   		<link rel="stylesheet" href="src/assets/css/styles.min.css" />
@@ -152,7 +152,7 @@
 								<div class="checklist-container">
 									<div class="checklist-header">
 										<h3 class="card-title fw-semibold">
-											Spin - Scene File
+											VR - Scene File
 										</h3>
 										<span class="checklist-progress">
 											<span id="completed">0</span> / <span id="total">0</span> completed
@@ -165,91 +165,139 @@
 										<div class="checklist-item">
 											<input type="checkbox" id="item1">
 											<label for="item1">
-												Import your Google Maps Latitude and Longitude into MapPuzzle.
+												Inside the Externals file, import the VR Camera and VR_Cam_Point Helper.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item2">
 											<label for="item2">
-												Download your High Res inner map (8192x8192 px - Zoom 19)
+												Bring the VR_Cam_Point_Helper so it is a good distance above the site. (Easy selection when projecting)
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item3">
 											<label for="item3">
-												Download your Low Res outer map (8192x8192 px - Zoom 17)
+												Begin to place the VR Points using the "Top" viewport along the X and Y Axis. 
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item4">
 											<label for="item4">
-												Perform your color correction as required to match to Precedent image
+												Make sure VR_Cam_Point Helpers are not instanced (This has caused script issues previously)
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item5">
 											<label for="item5">
-												Create the black and white masks you'll need for both the surrounding trees and also water.
+												Once all helpers are placed open Sini - Ignite Springboard.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item6">
 											<label for="item6">
-												Set up your Google Maps, Surrounding Trees and any other accompanying FP/Railclone/Geometry within the Externals file.
+												Open the Glue Objects menu and make sure "Glue By Pivot Point" is checked.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item7">
 											<label for="item7">
-												Set up your SpinCam and UX Lighting rigs within the Externals file temporarily.
+												Select all your helpers which are above the site.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item8">
 											<label for="item8">
-												Isolate the grass with lights enabled and adjust the values in the grass materials falloff settings. (Note IPR rendering wont work with testing)
+												Click "Pick Surface" in the Glue Objects menu and select a surface you would like to glue to.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item9">
 											<label for="item9">
-												Once dialled in, the grass should show when viewing from the SpinCam, and mulch when rendered with a Camera near the site (VR's)
+												Click "Glue Object"
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item10">
 											<label for="item10">
-												Copy "Bloor_New_Spin_Template.max" To your project folder.
+												Repeat this process until all of your VR_Cam_Point Helpers are glued to the surfaces below.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item11">
 											<label for="item11">
-												Rename in this format "01234-56 - Job Name - Spin"
+												Close Sini.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item12">
 											<label for="item12">
-												Import the SpinCam and UX Lighting rig from the Externals file into your Spin scene file.
+												Raise all of these objects by 1750mm on the Z-Axis.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item13">
 											<label for="item13">
-												Once imported and saved, delete the SpinCam and Lighting rig from the Externals file.
+												Run the "VR Keyframe Points" Script
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item14">
 											<label for="item14">
-												xRef in the Externals file.
+												Copy "Bloor_New_VR_Template.max" To your project folder.
 											</label>
 										</div>
 										<div class="checklist-item">
 											<input type="checkbox" id="item15">
 											<label for="item15">
+												Rename in this format "01234-56 - Job Name - VR"
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item16">
+											<label for="item16">
+												Import the VR Cam and all VR_Point_Helpers from the Externals file into your Spin scene file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item17">
+											<label for="item17">
+												Import the UX Lighting rig from the Spin Scene file into your VR scene file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item18">
+											<label for="item18">
+												Once imported and saved, delete the VR Cam and VR_Point_Helpers from the Externals file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item19">
+											<label for="item19">
+												xRef in the Externals file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item20">
+											<label for="item20">
 												xRef in the Buildings file.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item21">
+											<label for="item21">
+												Scene files will contain all the correct render settings pre loaded (No need to run any submission scripts)
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item22">
+											<label for="item22">
+												Simply set the frame range, output path and unsure layers are correctly enabled for the deliverable.
+											</label>
+										</div>
+										<div class="checklist-item">
+											<input type="checkbox" id="item23">
+											<label for="item23">
+												Send to farm.
 											</label>
 										</div>
 									</div>
@@ -295,12 +343,12 @@
     					state[checkbox.id] = checkbox.checked;
   					});
   
-  				const key = slot ? `checklistSFSpin${slot}` : 'checklistSFSpin';
+  				const key = slot ? `checklistSFvr${slot}` : 'checklistSFvr';
   					localStorage.setItem(key, JSON.stringify(state));
 				}
 			// Load checklist state from localStorage
 			function loadChecklist() {
-				const saved = localStorage.getItem('checklistSFSpin');
+				const saved = localStorage.getItem('checklistSFvr');
 				if (saved) {
 					const state = JSON.parse(saved);
 					Object.keys(state).forEach(id => {
