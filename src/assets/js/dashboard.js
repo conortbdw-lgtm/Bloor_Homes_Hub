@@ -70,6 +70,15 @@ $(function () {
     		titleEl.textContent = status;
   		}
 	}
+
+	function updateSceneFilePlotCGIStatus() {
+  		const percent = getChecklistPercentage8(); // PL Handover
+  		const status = getChecklistStatusText(percent);
+  		const titleEl = document.getElementById('scene-file-plotcgi-status');
+  		if (titleEl) {
+    		titleEl.textContent = status;
+  		}
+	}
 	
  	updateTestingExternalsStatus();
 	updateSceneFileSpinStatus();
@@ -78,6 +87,7 @@ $(function () {
 	updateQc1Status();
 	updatePLHandoverStatus();
 	updateSceneFileVRStatus();
+	updateSceneFilePlotCGIStatus();
 	
   	function getChecklistPercentage(slot = null) {
     	const key = slot ? `checklist3dsMaxState${slot}` : 'checklist3dsMaxState';
@@ -141,6 +151,16 @@ $(function () {
 
   	function getChecklistPercentage7(slot = null) {
     	const key = slot ? `checklistSFvr${slot}` : 'checklistSFvr';
+    	const saved = localStorage.getItem(key);
+    	if (saved) {
+      		const state = JSON.parse(saved);
+      		return state.percentage || 0;
+    	}
+    	return 0;
+  	}
+
+  	function getChecklistPercentage8(slot = null) {
+    	const key = slot ? `checklistSFPlotcgis${slot}` : 'checklistSFPlotcgis';
     	const saved = localStorage.getItem(key);
     	if (saved) {
       		const state = JSON.parse(saved);
@@ -432,6 +452,47 @@ $(function () {
   	};
   	window.breakup7Chart = new ApexCharts(document.querySelector("#breakup7"), breakup7);  // Global for updates
   	window.breakup7Chart.render();
+	
+  	// Auto-update when checklist saves (cross-tab)
+  	window.addEventListener('storage', (e) => {
+		if (e.key && e.key.startsWith('checklist-sf-vr-status')) {
+  			const perc = getChecklistPercentage7();
+  			window.breakup7Chart.updateOptions({ series: [perc] });
+  			updateMaxStatus();
+		}
+	});
+	
+	// Breakup8 (Scene File - Plot CGI's) - Dynamic from checklist
+	const initialPercentage8 = getChecklistPercentage8();
+	var breakup8 = {
+		series: [initialPercentage8],  // Loads saved checklist %
+    	labels: ["Scene File - Plot CGI"],
+    	chart: {
+      		height: 260,
+      		type: "radialBar",
+      		fontFamily: "Plus Jakarta Sans', sans-serif",
+      		foreColor: "#adb0bb",
+    	},
+    	plotOptions: {
+      		radialBar: {
+        		hollow: { size: "70%" },
+        		track: { background: "#ecf2ff" },
+        		dataLabels: {
+          			name: { show: true, fontSize: "14px" },
+          			value: {
+            			show: true,
+            			fontSize: "18px",
+            			formatter: function (val) { return Math.round(val) + "%"; }
+          			},
+          			total: { show: false }
+        		}
+      		}
+    	},
+    	colors: ["#5D87FF"],
+    	stroke: { lineCap: "round" }
+  	};
+  	window.breakup8Chart = new ApexCharts(document.querySelector("#breakup8"), breakup8);  // Global for updates
+  	window.breakup8Chart.render();
 	
   	// Auto-update when checklist saves (cross-tab)
   	window.addEventListener('storage', (e) => {
