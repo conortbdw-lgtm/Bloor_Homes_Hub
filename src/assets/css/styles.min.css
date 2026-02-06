@@ -10459,6 +10459,9 @@ fieldset:disabled .btn {
 }
 .fw-semibold {
   font-weight: 600 !important;
+}
+.fw-semibold-white {
+  font-weight: 600 !important;
 	color: #FFF;
 }
 .fw-bold {
