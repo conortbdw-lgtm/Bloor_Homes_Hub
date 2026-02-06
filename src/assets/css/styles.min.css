@@ -81,7 +81,7 @@
   --bs-primary-bg-subtle: #dfe7ff;
   --bs-secondary-bg-subtle: #f6f9fc;
   --bs-success-bg-subtle: #d0f8f1;
-  --bs-info-bg-subtle: #ddebff;
+  --bs-info-bg-subtle: #001B36;
   --bs-warning-bg-subtle: #ffefd2;
   --bs-danger-bg-subtle: #fee7e1;
   --bs-light-bg-subtle: #fbfcfe;
@@ -206,6 +206,18 @@
   --bs-border-color: #495057;
   --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
 }
+
+.logo-docu-small {
+  height: 2px;      /* or any value */
+  width: auto;        /* keeps aspect ratio */
+}
+
+.logo-fixed-size {
+  height: 30px !important;  /* adjust as needed */
+  width: auto !important;
+  max-width: none !important;  /* beats img-fluid */
+}
+
 *,
 :after,
 :before {
@@ -10447,6 +10459,7 @@ fieldset:disabled .btn {
 }
 .fw-semibold {
   font-weight: 600 !important;
+	color: #FFF;
 }
 .fw-bold {
   font-weight: 500 !important;
